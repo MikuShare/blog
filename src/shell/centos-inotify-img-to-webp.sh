@@ -16,14 +16,14 @@
 
 rootDir=/sxyimagedata/webp/
 # 指定监听的事件为close_write
-inotifywait -mr --timefmt '%Y/%m/%d/%H:%M' --format '%w%f' -e close_write $rootDir | while read file
+inotifywait -mr --timefmt '%Y/%m/%d/%H:%M' --format '%w%f' -e create,move,modify,attrib $rootDir | while read file
 do
        echo "filepath>>${dir}${file}"
        echo "dir>>${dir}"
        echo "file>>${file}"
        fileName=${file}
        fName=$fileName
-         if [ "${fName##*.}" = "jpg" -o "${fName##*.}" = "JPG" -o "${fName##*.}" = "png" -o "${fName##*.}" = "PNG" -o "${fName##*.}" = "bmp"  -o "${fName##*.}" = "BMP" ]; 
+         if [ "${fName##*.}" = "jpg" -o "${fName##*.}" = "JPG" -o "${fName##*.}" = "png" -o "${fName##*.}" = "PNG" -o "${fName##*.}" = "bmp"  -o "${fName##*.}" = "BMP" -o "${fName##*.}" = "jpeg"  -o "${fName##*.}" = "JPEG" ];
              then
                  inputFilePath=$fName
                  outputFilePath=${fName%.*}.webp
